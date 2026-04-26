@@ -1,6 +1,33 @@
-@SmartTracker.Api_HostAddress = http://localhost:5151
+@hostname = localhost
+@port = 5000
+@host = http://{{hostname}}:{{port}}
 
-GET {{SmartTracker.Api_HostAddress}}/weatherforecast/
+### 1. Összes feladat lekérdezése (READ)
+GET {{host}}/api/tasks
 Accept: application/json
 
-###
+### 2. Új feladat létrehozása (CREATE)
+POST {{host}}/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Bevásárlás",
+  "description": "Tej, kenyér, tojás venni a boltban",
+  "status": "Todo"
+}
+
+### 3. Egy létező feladat módosítása (UPDATE)
+# FIGYELEM: Cseréld ki az ID-t arra, amit a POST kérés visszaadott!
+PUT {{host}}/api/tasks/IDE_MASOLD_AZ_ID_T
+Content-Type: application/json
+
+{
+  "id": "IDE_MASOLD_AZ_ID_T",
+  "title": "Bevásárlás",
+  "description": "Tej, kenyér, tojás venni a boltban (MÓDOSÍTVA)",
+  "status": "InProgress"
+}
+
+### 4. Feladat törlése (DELETE)
+# FIGYELEM: Cseréld ki az ID-t a törölni kívánt feladatéra!
+DELETE {{host}}/api/tasks/IDE_MASOLD_AZ_ID_T
