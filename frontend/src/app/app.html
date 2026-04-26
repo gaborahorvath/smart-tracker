@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <div class="container mt-5">
+  <h2 class="mb-4">Smart Tracker <span class="badge bg-info text-dark" style="font-size: 0.5em;">Microservice Edition</span></h2>
+
+  <div *ngIf="stats" class="alert alert-light border shadow-sm d-flex justify-content-around mb-4">
+    <span><strong>Összes feladat:</strong> {{ stats.totalTasks }}</span>
+    <span><strong>Teendő:</strong> {{ stats.todoCount }}</span>
+    <span class="text-success"><i class="bi bi-check-circle"></i> {{ stats.message }}</span>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card shadow border-0">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Új feladat hozzáadása</h4>
+          <div class="mb-2">
+            <input type="text" [(ngModel)]="newTask.title" class="form-control" placeholder="Feladat címe">
+          </div>
+          <div class="mb-3">
+            <textarea [(ngModel)]="newTask.description" class="form-control" placeholder="Leírás"></textarea>
+          </div>
+          <button (click)="addTask()" class="btn btn-success w-100">Mentés</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h3 class="mb-4">Aktuális Teendők</h3>
+      <div class="list-group shadow-sm">
+        <div *ngFor="let task of tasks" class="list-group-item d-flex justify-content-between align-items-center animate__animated animate__fadeIn">
+          <div>
+            <h5 class="mb-1">{{ task.title }}</h5>
+            <p class="mb-0 text-muted">{{ task.description }}</p>
+          </div>
+          <button (click)="deleteTask(task.id)" class="btn btn-outline-danger btn-sm">Törlés</button>
+        </div>
+        
+        <div *ngIf="tasks.length === 0" class="p-5 text-center text-muted">
+          <p class="mb-0">Nincs feladat az adatbázisban. Kezdj el felvenni egyet!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
